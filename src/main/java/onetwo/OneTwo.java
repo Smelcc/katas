@@ -1,9 +1,8 @@
 package onetwo;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public class OneTwo {
@@ -26,6 +25,24 @@ public class OneTwo {
 	}
 
 	public String readValue(String input) {
-		return Stream.of(input.split(" ")).map(value -> "one " + Conversion.of(value)).collect(Collectors.joining(" "));
+		StringJoiner result = new StringJoiner(" ");
+		Deque<String> pile = new ArrayDeque<>();
+		for (String chiffre : input.split(" ")) {
+			if (!pile.isEmpty() && !chiffre.equals(pile.peek())) {
+				result.add(ecrireResultat(pile));
+				pile.clear();
+			}
+			pile.add(chiffre);
+		}
+		result.add(ecrireResultat(pile));
+		return result.toString();
+	}
+
+	private String ecrireResultat(Deque<String> pile) {
+		return convert(pile.size(), pile.peek());
+	}
+
+	private String convert(int nombre, String value) {
+		return Conversion.of(String.valueOf(nombre)) + " " + Conversion.of(value);
 	}
 }

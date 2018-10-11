@@ -89,4 +89,64 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
+	
+	@Test
+	public void test_devrait_retourner_two_two_quand_valeur_2_2() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String expected = "two two";
+		String input = "2 2";
+		// when
+		String result = onetwo.readValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	
+	@Test
+	public void test_devrait_retourner_two_three_quand_valeur_3_3() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String expected = "two three";
+		String input = "3 3";
+		// when
+		String result = onetwo.readValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	
+	@Test
+	public void test_devrait_retourner_three_three_quand_valeur_3_3_3() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String expected = "three three";
+		String input = "3 3 3";
+		// when
+		String result = onetwo.readValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	
+	@Test
+	public void test_devrait_retourner_four_three_quand_valeur_3_3_3_3() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String expected = "four three";
+		String input = "3 3 3 3";
+		// when
+		String result = onetwo.readValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	
+	@Test
+	public void test_devrait_retourner_nine_five_one_five_quand_valeur_5_5_5_5_5_5_5_5_5_5() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String expected = "nine five one five";
+		String input = "5 5 5 5 5 5 5 5 5 5";
+		// when
+		String result = onetwo.readValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
 }
