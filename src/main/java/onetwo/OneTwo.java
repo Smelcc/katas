@@ -27,6 +27,7 @@ public class OneTwo {
 		}
 	}
 
+	// Exo 1 : "1 1 3" -> "two one one three"
 	public String readValue(String input) {
 		StringJoiner result = new StringJoiner(" ");
 		int nombreOccurences = 0;
@@ -56,17 +57,25 @@ public class OneTwo {
 		return Conversion.fromIntRepresentation(String.valueOf(nombre)) + " " + Conversion.fromIntRepresentation(value);
 	}
 
+	// Exo 2 : "two one one three" -> "1 1 3"
 	public String writeValue(String input) {
-
-		if ("one one one two".equals(input)) {
-			return "1 2";
-		}
-		String chiffre = Conversion.fromStringRepresentation(input.split(" ")[1]);
 		StringJoiner result = new StringJoiner(" ");
-		int nbOcurrence = Integer.parseInt(Conversion.fromStringRepresentation(input.split(" ")[0]));
-		for (int i = 0; i < nbOcurrence; i++) {
-			result.add(chiffre);
+
+		String[] split = input.split(" ");
+		int indexDepart = 0;
+		while (split.length > indexDepart) {
+			construireResultat(result, split, indexDepart);
+			indexDepart += 2;
 		}
+
 		return result.toString();
+	}
+
+	private void construireResultat(StringJoiner result, String[] split, int indexDepart) {
+		int nbOcurrence2 = Integer.parseInt(Conversion.fromStringRepresentation(split[indexDepart]));
+		String chiffre2 = Conversion.fromStringRepresentation(split[indexDepart + 1]);
+		for (int i = 0; i < nbOcurrence2; i++) {
+			result.add(chiffre2);
+		}
 	}
 }

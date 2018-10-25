@@ -53,7 +53,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_one_one_one_two_quand_valeur_1_2() {
 		// given
@@ -65,7 +65,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_one_one_one_three_quand_valeur_1_3() {
 		// given
@@ -77,7 +77,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_two_one_quand_valeur_1_1() {
 		// given
@@ -89,7 +89,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_two_two_quand_valeur_2_2() {
 		// given
@@ -101,7 +101,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_two_three_quand_valeur_3_3() {
 		// given
@@ -113,7 +113,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_three_three_quand_valeur_3_3_3() {
 		// given
@@ -125,7 +125,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_four_three_quand_valeur_3_3_3_3() {
 		// given
@@ -137,7 +137,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_nine_five_one_five_quand_valeur_5_5_5_5_5_5_5_5_5_5() {
 		// given
@@ -149,7 +149,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_nine_five_two_five_quand_valeur_5_5_5_5_5_5_5_5_5_5_5() {
 		// given
@@ -161,7 +161,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_nine_six_two_six_quand_valeur_6_6_6_6_6_6_6_6_6_6_6() {
 		// given
@@ -173,7 +173,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_nine_six_nine_six_two_six_quand_valeur_20x6() {
 		// given
@@ -185,7 +185,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_1_quand_valeur_one_one() {
 		// given
@@ -197,7 +197,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_2_quand_valeur_one_two() {
 		// given
@@ -209,7 +209,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_3_quand_valeur_one_three() {
 		// given
@@ -221,7 +221,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_3_3_quand_valeur_two_three() {
 		// given
@@ -233,7 +233,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_4_4_quand_valeur_two_four() {
 		// given
@@ -245,7 +245,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_1_1_1_quand_valeur_three_one() {
 		// given
@@ -257,7 +257,7 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_1_2_quand_valeur_one_one_one_two() {
 		// given
@@ -269,13 +269,59 @@ public class OneTwoTest {
 		// then
 		Assert.assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void test_devrait_retourner_1_3_quand_valeur_one_one_one_three() {
 		// given
 		OneTwo onetwo = new OneTwo();
 		String input = "one one one three";
 		String expected = "1 3";
+		// when
+		String result = onetwo.writeValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	
+	@Test
+	public void test_devrait_retourner_1_4_quand_valeur_one_one_one_for() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String input = "one one one four";
+		String expected = "1 4";
+		// when
+		String result = onetwo.writeValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	@Test
+	public void test_devrait_retourner_2_4_quand_valeur_one_two_one_for() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String input = "one two one four";
+		String expected = "2 4";
+		// when
+		String result = onetwo.writeValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	
+	@Test
+	public void test_devrait_retourner_2_4_4_quand_valeur_one_two_two_for() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String input = "one two two four";
+		String expected = "2 4 4";
+		// when
+		String result = onetwo.writeValue(input);
+		// then
+		Assert.assertEquals(expected, result);
+	}
+	@Test
+	public void test_devrait_retourner_10_x_9_quand_valeur_nine_nine_one_nine() {
+		// given
+		OneTwo onetwo = new OneTwo();
+		String input = "nine nine one nine";
+		String expected = "9 9 9 9 9 9 9 9 9 9";
 		// when
 		String result = onetwo.writeValue(input);
 		// then
