@@ -3,12 +3,19 @@ package tennis;
 import java.util.stream.Stream;
 
 public class TennisGame {
-	private int scoreA = 0;
-	private int scoreB = 0;
+	private Joueur joueur1;
+	private Joueur joueur2;
+	
+	TennisGame(String nomJoueur1, String nomJoueur2) {
+		joueur1 = new Joueur(nomJoueur1);
+		joueur2 = new Joueur(nomJoueur2);
+	}
+	
+	private final String GAME = "Game ";
+	private final String ADVANTAGE = "Advantage ";
 
 	enum Point {
-		LOVE(0, "Love"), FIFTEEN(1, "Fifteen"), THIRTY(2, "Thirty"), FORTY(3, "Forty"), ADVANTAGE(4, "Advantage"),
-		GAME(5, "Game");
+		LOVE(0, "Love"), FIFTEEN(1, "Fifteen"), THIRTY(2, "Thirty"), FORTY(3, "Forty");
 
 		int score;
 		String label;
@@ -32,35 +39,30 @@ public class TennisGame {
 		if (isScoreDeuce()) {
 			return "Deuce";
 		}
-		if (isAdvantageMauresmo()) {
-			return Point.ADVANTAGE + " Mauresmo";
+		if (joueur1.aiJeLAvantageContre(joueur2)) {
+			return ADVANTAGE + joueur1.getNom();
 		}
-		if (isScoreGagnant(scoreA)) {
-			return Point.GAME + " Mauresmo";
+		if (joueur2.aiJeLAvantageContre(joueur1)) {
+			return ADVANTAGE + joueur2.getNom();
 		}
-		if (isScoreGagnant(scoreB)) {
-			return Point.GAME + " Pierce";
+		if (joueur1.aiJeGagnéContre(joueur2)) {
+			return GAME + joueur1.getNom();
 		}
-		return Point.of(scoreA) + " - " + Point.of(scoreB);
-	}
-
-	private boolean isAdvantageMauresmo() {
-		return (scoreA >= 3 && scoreB >= 3 && scoreA > scoreB);
+		if (joueur2.aiJeGagnéContre(joueur1)) {
+			return GAME + joueur2.getNom();
+		}
+		return Point.of(joueur1.getScore()) + " - " + Point.of(joueur2.getScore());
 	}
 
 	private boolean isScoreDeuce() {
-		return scoreA == scoreB && scoreA > 2;
-	}
-
-	private boolean isScoreGagnant(int score) {
-		return score > 3;
+		return joueur1.getScore() == joueur2.getScore() && joueur1.getScore() > 2;
 	}
 
 	public void score(int numéroJoueur) {
 		if (numéroJoueur == 1) {
-			scoreA++;
+			joueur1.marqueUnPoint();
 		} else {
-			scoreB++;
+			joueur2.marqueUnPoint();
 		}
 	}
 
