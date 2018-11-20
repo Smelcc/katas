@@ -211,11 +211,174 @@ public class ChiffresRomainsTest {
 		// then
 		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
 	}
+	
 	@Test
 	public void test_devrait_retourner_L_pour_50() {
 		// given
 		int nombreEntier = 50;
 		String resultatAttendu = "L";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+
+	@Test
+	public void test_devrait_retourner_XLIV_pour_44() {
+		// given
+		int nombreEntier = 44;
+		String resultatAttendu = "XLIV";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_XLVI_pour_46() {
+		// given
+		int nombreEntier = 46;
+		String resultatAttendu = "XLVI";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_LI_pour_51() {
+		// given
+		int nombreEntier = 51;
+		String resultatAttendu = "LI";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_LIV_pour_54() {
+		// given
+		int nombreEntier = 54;
+		String resultatAttendu = "LIV";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_LXIX_pour_69() {
+		// given
+		int nombreEntier = 69;
+		String resultatAttendu = "LXIX";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_C_pour_100() {
+		// given
+		int nombreEntier = 100;
+		String resultatAttendu = "C";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_IC_pour_90() {
+		// given
+		int nombreEntier = 90;
+		String resultatAttendu = "XC";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_IC_pour_92() {
+		// given
+		int nombreEntier = 92;
+		String resultatAttendu = "XCII";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_D_pour_500() {
+		// given
+		int nombreEntier = 500;
+		String resultatAttendu = "D";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_M_pour_1000() {
+		// given
+		int nombreEntier = 1000;
+		String resultatAttendu = "M";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+
+	@Test
+	public void test_devrait_retourner_CD_pour_400() {
+		// given
+		int nombreEntier = 400;
+		String resultatAttendu = "CD";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_CDI_pour_401() {
+		// given
+		int nombreEntier = 401;
+		String resultatAttendu = "CDI";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_CM_pour_900() {
+		// given
+		int nombreEntier = 900;
+		String resultatAttendu = "CM";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_MCMXCIX_pour_1999() {
+		// given
+		int nombreEntier = 1999;
+		String resultatAttendu = "MCMXCIX";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_MCMXCIX_pour_2494() {
+		// given
+		int nombreEntier = 2494;
+		String resultatAttendu = "MMCDXCIV";
+		// when
+		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
+		// then
+		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
+	}
+	@Test
+	public void test_devrait_retourner_MMM_pour_3000() {
+		// given
+		int nombreEntier = 3000;
+		String resultatAttendu = "MMM";
 		// when
 		String resultat = ChiffreRomain.convertirEnChiffreRomain(nombreEntier);
 		// then

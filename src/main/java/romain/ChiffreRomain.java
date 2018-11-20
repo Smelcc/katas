@@ -2,27 +2,24 @@ package romain;
 
 public class ChiffreRomain {
 	public static String convertirEnChiffreRomain(int nombreEntier) {
-		if (nombreEntier == 40) {
-			return ("XL");
-		}
-		
 		StringBuilder result = new StringBuilder();
 		for(EChiffreRomain eChiffreRomain : EChiffreRomain.recupererValeursDecroissantes()) {
-			nombreEntier = concatenerIteration(nombreEntier, result, eChiffreRomain);
-			if (nombreEntier == 9) {
-				result.append("IX");
-				break; 
-			}
-			if (nombreEntier == 4) {
-				result.append("IV");
-				break; 
-			}
+			nombreEntier = gererCasParticuliers(nombreEntier, result);
+			nombreEntier = concatenerChiffresRomainsAsNecessary(nombreEntier, result, eChiffreRomain);
 		}
-
 		return result.toString();
 	}
 
-	private static int concatenerIteration(int nombreEntier, StringBuilder result, EChiffreRomain chiffreRomain) {
+	private static int gererCasParticuliers(int nombreEntier, StringBuilder result) {
+		EChiffreRomainSpeciaux casParticulier = EChiffreRomainSpeciaux.of(nombreEntier);
+		if (casParticulier != null) {
+			result.append(casParticulier.getLibellé());
+			nombreEntier -= casParticulier.getValeureEntière();
+		}
+		return nombreEntier;
+	}
+
+	private static int concatenerChiffresRomainsAsNecessary(int nombreEntier, StringBuilder result, EChiffreRomain chiffreRomain) {
 		while (nombreEntier >= chiffreRomain.getValeureEntière()) {
 			result.append(chiffreRomain.getLibellé());
 			nombreEntier -= chiffreRomain.getValeureEntière();
