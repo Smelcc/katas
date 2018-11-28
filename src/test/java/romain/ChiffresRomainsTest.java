@@ -365,7 +365,7 @@ public class ChiffresRomainsTest {
 		Assertions.assertThat(resultat).isEqualTo(resultatAttendu);
 	}
 	@Test
-	public void test_devrait_retourner_MCMXCIX_pour_2494() {
+	public void test_devrait_retourner_MMCDXCIV_pour_2494() {
 		// given
 		int nombreEntier = 2494;
 		String resultatAttendu = "MMCDXCIV";

@@ -38,4 +38,8 @@ public enum EChiffreRomainSpeciaux {
 		return chiffre.valeureEntière <= nombreEntier
 							&& chiffre.borneSchließtAus > nombreEntier;
 	}
+	public static EChiffreRomainSpeciaux récupérerChiffreDepuisLibellé(String chiffreRomainSousReprésentationChaînée) {
+		return Stream.of(EChiffreRomainSpeciaux.values()).filter(énuméré -> chiffreRomainSousReprésentationChaînée.equals(énuméré.getLibellé()))
+		.findFirst().orElse(null);
+	}
 }

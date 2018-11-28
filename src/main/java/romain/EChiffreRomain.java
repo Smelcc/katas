@@ -40,4 +40,9 @@ public enum EChiffreRomain {
 	public static List<EChiffreRomain> recupererValeursDecroissantes() {
 		return Stream.of(EChiffreRomain.values()).sorted(comparateurDecroissant).collect(Collectors.toList());
 	}
+
+	public static EChiffreRomain récupérerChiffreDepuisLibellé(String chiffreRomain) {
+		return Stream.of(EChiffreRomain.values()).filter(énuméré -> chiffreRomain.equals(énuméré.getLibellé() + ""))
+		.findFirst().orElse(null);
+	}
 }
