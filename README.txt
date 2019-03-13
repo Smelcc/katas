@@ -3,4 +3,6 @@ Plugin Cucumber pour Eclipse : https://marketplace.eclipse.org/content/cucumber-
 - Permet de faire "New Step-Definition class"
 - Penser à commencer par une majuscule au nom du fichier .feature
 
+Pour les couleurs dans la console (mieux afficher run Cucumber) : https://marketplace.eclipse.org/content/ansi-escape-console
+
 KataCatalogue : http://codingdojo.org/KataCatalogue/

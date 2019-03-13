@@ -8,8 +8,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(
         features = {"classpath:onetwo"},
         glue = {"onetwo"},
-//        plugin = {"pretty", "html:target/cucumber"}
-        format = "progress"
+        plugin = {"pretty", "html:target/cucumber"}
 )
 public class OneTwoTest {
 }
