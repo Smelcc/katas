@@ -21,6 +21,11 @@ public class OneTwoStepdefs {
     public void transformation() {
         resultat = oneTwo.transformation(parametres);
     }
+    
+    @When("^transformation inversée$")
+    public void transformationInversée() {
+        resultat = oneTwo.transformationInversée(parametres);
+    }
 
     @Then("^le résultat est (.*)$")
     public void leResultatEst(String resultatAttendu) {

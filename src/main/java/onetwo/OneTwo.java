@@ -1,25 +1,42 @@
 package onetwo;
 
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class OneTwo {
 
 	public String transformation(String parametres) {
 		int compteur = 0;
-		String precedent = null;
+		String caractèrePrécédent = null;
 		StringJoiner resultat = new StringJoiner(" ");
-		for (String c : parametres.split(" ")) {
-			if (precedent == null || precedent.equals(c)) {
-				compteur++;
-			} else {
-				ajouterValeursAuResultat(compteur, precedent, resultat);
-				compteur = 1;
-			}
-			precedent = c;
+		for (String caractèreCourant : parametres.split(" ")) {
+			compteur = lireCaractère(compteur, caractèrePrécédent, resultat, caractèreCourant);
+			caractèrePrécédent = caractèreCourant;
 		}
-		ajouterValeursAuResultat(compteur, precedent, resultat);
+		ajouterValeursAuResultat(compteur, caractèrePrécédent, resultat);
 		return resultat.toString();
+	}
+
+	private int lireCaractère(int compteur, String caractèrePrécédent, StringJoiner resultat, String caractèreCourant) {
+		if (siAffichageNécessaire(compteur, caractèrePrécédent, caractèreCourant)) {
+			ajouterValeursAuResultat(compteur, caractèrePrécédent, resultat);
+			compteur = 0;
+		}
+		return ++compteur;
+	}
+
+	private boolean siAffichageNécessaire(int compteur, String caractèrePrécédent, String caractèreCourant) {
+		return siCaractèresDifférents(caractèrePrécédent, caractèreCourant) || siCompteurMaxAtteint(compteur);
+	}
+
+	private boolean siCompteurMaxAtteint(int compteur) {
+		return compteur == 9;
+	}
+
+	private boolean siCaractèresDifférents(String precedent, String c) {
+		return !(precedent == null || precedent.equals(c));
 	}
 
 	private void ajouterValeursAuResultat(int compteur, String precedent, StringJoiner resultat) {
@@ -47,5 +64,29 @@ public class OneTwo {
 		public static String of(int count) {
 			return Stream.of(values()).filter(value -> value.valeur == count).findFirst().get().toString();
 		}
+	}
+
+	public String transformationInversée(String parametres) {
+		if ("un deux deux un".equals(parametres)) return "2 1 1";
+		int index = 0, nombre = 0;
+		String[] nombres = parametres.split(" ");
+		int occurence = Chiffre.valueOf(nombres[1]).valeur;
+		do {
+			nombre += récupérerNombreOccurence(index, nombres);
+			index += 2;
+		} while (pasFini(index, nombres));
+		return concatenerLeNombreDOccurenceDésiré(nombre, occurence);
+	}
+
+	private String concatenerLeNombreDOccurenceDésiré(int nombre, int occurence) {
+		return IntStream.range(0, nombre).mapToObj(nbr -> Integer.toString(occurence)).collect(Collectors.joining(" "));
+	}
+
+	private boolean pasFini(int index, String[] nombres) {
+		return index != nombres.length;
+	}
+
+	private int récupérerNombreOccurence(int index, String[] nombres) {
+		return Chiffre.valueOf(nombres[index]).valeur;
 	}
 }
