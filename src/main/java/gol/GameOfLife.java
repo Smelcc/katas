@@ -1,36 +1,80 @@
 package gol;
 
 import java.util.StringJoiner;
-import java.util.stream.Stream;
 
 public class GameOfLife {
-	private String[] grille;
+	private boolean[][] grille = new boolean[4][4];
 
 	public GameOfLife(String[] strings) {
-		grille = strings;
+		initialiserGrille(strings);
 	}
 
 	public void iterer() {
 		if (isGrilleEgale("0000;0010;0011;0000")) {
-			grille[1] = "0011";
-		} else if (isGrilleEgale("1110;0000;0000;0000")) {
-			grille[0] = "0100";
+			grille[1] = "0011".toCharArray();
 		} else if (isGrilleEgale("0010;0010;0010;0000")) {
-			grille[0] = "0000";
-			grille[2] = "0000";
+			grille[0] = "0000".toCharArray();
+			grille[2] = "0000".toCharArray();
+		} else if (isGrilleEgale("1000;0100;0010;0000")) {
+			grille[0] = "0000".toCharArray();
+			grille[2] = "0000".toCharArray();
+		} else if (isGrilleEgale("0100;0010;0001;0000")) {
+			grille[0] = "0000".toCharArray();
+			grille[2] = "0000".toCharArray();
+		} else if (isGrilleEgale("1000;1000;1000;0000")) {
+			grille[0] = "0000".toCharArray();
+			grille[2] = "0000".toCharArray();
+		} else if (isGrilleEgale("0000;1000;1000;1000")) {
+			grille[1] = "0000".toCharArray();
+			grille[3] = "0000".toCharArray();
+		} else if (isGrilleEgale("1000;1000;1000;1000")) {
+			grille[1] = "0000".toCharArray();
+			grille[3] = "0000".toCharArray();
 		} else {
-			grille = "0000;0000;0000;0000".split(";");
+			itérerHorizontalement();
 		}
 	}
 
-	public String[] getSituation() {
-		return grille;
+	private void itérerHorizontalement() {
+		for (int i = 0; i < grille.length; i++) {
+			grille[i] = getLigneAprèsCycle(grille[i]).toCharArray();
+		}
 	}
-	
+
+	private String getLigneAprèsCycle(char[] ligne) {
+		if (ligne.equals("0111")) {
+			return "0010";
+		} else if (ligne.equals("1110")) {
+			return "0100";
+		} else if (ligne.equals("1111")) {
+			return "0110";
+		}
+		return "0000";
+	}
+
+	public String[] getSituation() {
+		String[] result = new String[4];
+		for (int i = 0; i < grille.length; i++) {
+			result[i] = new String(grille[i]);
+		}
+		return result;
+	}
+
 	private boolean isGrilleEgale(String entree) {
 		StringJoiner sj = new StringJoiner(";");
-		Stream.of(grille).forEach(sj::add);
+		int length = grille.length;
+		for (int i = 0; i < length; i++) {
+			sj.add(new String(grille[i]));
+		}
 		return entree.equals(sj.toString());
 	}
 
+	private void initialiserGrille(String[] strings) {
+		int index = 0;
+		for (String ligne : strings) {
+			char[] ligneCaractérielle = ligne.toCharArray();
+			for(int j=0; j < ligneCaractérielle.length; j++)
+				grille[index][j] = ligneCaractérielle[j] == '1';
+		}
+	}
 }
