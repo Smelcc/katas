@@ -3,7 +3,7 @@ package gol;
 import java.util.StringJoiner;
 
 public class GameOfLife {
-	private boolean[][] grille = new boolean[4][4];
+	private char[][] grille = new char[4][4];
 
 	public GameOfLife(String[] strings) {
 		initialiserGrille(strings);
@@ -27,8 +27,9 @@ public class GameOfLife {
 		} else if (isGrilleEgale("0000;1000;1000;1000")) {
 			grille[1] = "0000".toCharArray();
 			grille[3] = "0000".toCharArray();
-		} else if (isGrilleEgale("1000;1000;1000;1000")) {
-			grille[1] = "0000".toCharArray();
+		} else if (isGrilleEgale("1000;1000;1000;1000") || isGrilleEgale("0100;0100;0100;0100")
+				|| isGrilleEgale("0010;0010;0010;0010") || isGrilleEgale("0001;0001;0001;0001")) {
+			grille[0] = "0000".toCharArray();
 			grille[3] = "0000".toCharArray();
 		} else {
 			itérerHorizontalement();
@@ -42,39 +43,34 @@ public class GameOfLife {
 	}
 
 	private String getLigneAprèsCycle(char[] ligne) {
-		if (ligne.equals("0111")) {
+		if (new String(ligne).equals("0111")) {
 			return "0010";
-		} else if (ligne.equals("1110")) {
+		} else if (new String(ligne).equals("1110")) {
 			return "0100";
-		} else if (ligne.equals("1111")) {
+		} else if (new String(ligne).equals("1111")) {
 			return "0110";
 		}
 		return "0000";
 	}
 
-	public String[] getSituation() {
+	public String[] convertirDepuisLaGrilleActuelleVersUnTableauDeChaineDeCaractères() {
 		String[] result = new String[4];
-		for (int i = 0; i < grille.length; i++) {
+		for (int i = 0; i < grille.length; i++)
 			result[i] = new String(grille[i]);
-		}
 		return result;
 	}
 
 	private boolean isGrilleEgale(String entree) {
 		StringJoiner sj = new StringJoiner(";");
 		int length = grille.length;
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++)
 			sj.add(new String(grille[i]));
-		}
 		return entree.equals(sj.toString());
 	}
 
 	private void initialiserGrille(String[] strings) {
 		int index = 0;
-		for (String ligne : strings) {
-			char[] ligneCaractérielle = ligne.toCharArray();
-			for(int j=0; j < ligneCaractérielle.length; j++)
-				grille[index][j] = ligneCaractérielle[j] == '1';
-		}
+		for (String ligne : strings)
+			grille[index++] = ligne.toCharArray();
 	}
 }

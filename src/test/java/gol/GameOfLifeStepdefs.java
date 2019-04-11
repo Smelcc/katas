@@ -21,7 +21,7 @@ public class GameOfLifeStepdefs {
 
   @Then("^Le résultat est (.*)$")
   public void then(String résultatEscompté) throws Throwable {
-	  String[] situation = gameOfLife.getSituation();
+	  String[] situation = gameOfLife.convertirDepuisLaGrilleActuelleVersUnTableauDeChaineDeCaractères();
 	  Assertions.assertThat(situation).isEqualTo(résultatEscompté.split(";"));
   }
 
