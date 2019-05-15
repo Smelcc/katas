@@ -31,14 +31,16 @@ public class GameOfLife {
 				|| isGrilleEgale("0010;0010;0010;0010") || isGrilleEgale("0001;0001;0001;0001")) {
 			grille[0] = "0000".toCharArray();
 			grille[3] = "0000".toCharArray();
-		} else {
-			itérerHorizontalement();
-		}
-	}
-
-	private void itérerHorizontalement() {
-		for (int i = 0; i < grille.length; i++) {
-			grille[i] = getLigneAprèsCycle(grille[i]).toCharArray();
+		} else if (isGrilleEgale("1011;0000;0000;0000") || isGrilleEgale("1001;0000;0000;0000")
+				|| isGrilleEgale("0001;0000;0000;0000") || isGrilleEgale("1000;0000;0000;0000")
+				|| isGrilleEgale("1110;0000;0000;0000") || isGrilleEgale("0111;0000;0000;0000")
+				|| isGrilleEgale("1111;0000;0000;0000") || isGrilleEgale("1010;0000;0000;0000")) {
+			grille[0] = "0000".toCharArray();
+		} else if (isGrilleEgale("0000;1011;0000;0000") || isGrilleEgale("0000;1001;0000;0000")
+				|| isGrilleEgale("0000;0001;0000;0000") || isGrilleEgale("0000;1000;0000;0000")
+				|| isGrilleEgale("0000;1110;0000;0000") || isGrilleEgale("0000;0111;0000;0000")
+				|| isGrilleEgale("0000;1111;0000;0000") || isGrilleEgale("0000;1010;0000;0000")) {
+			grille[1] = "0000".toCharArray();
 		}
 	}
 
