@@ -49,6 +49,30 @@ Feature: Game of Life
     When Itération
     Then Le résultat est vide
     
+    Scenario: Trois cellules vivantes en entrée et aucune survit
+    Given Coordonnée cellule vivante 2,2;1,1;1,4
+    When Itération
+    Then Le résultat est vide
+    
+    Scenario: Trois cellules vivantes en entrée et aucune survit
+    Given Coordonnée cellule vivante 2,3;1,2;1,5
+    When Itération
+    Then Le résultat est vide
+    
+    Scenario: Trois cellules vivantes en entrée et un survit
+    Given Coordonnée cellule vivante 2,3;1,2;1,1
+    When Itération
+    Then Le résultat est 1,2
+    
+    Scenario: Trois cellules vivantes en entrée et un survit
+    Given Coordonnée cellule vivante 3,3;2,2;2,1
+    When Itération
+    Then Le résultat est 2,2
+    
+    Scenario: Trois cellules vivantes en entrée et un survit
+    Given Coordonnée cellule vivante 1,3;1,5;2,4
+    When Itération
+    Then Le résultat est 2,4
     
 #  Scenario Template: Une colonne
 #   Given Grille <entrée>

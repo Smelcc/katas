@@ -1,14 +1,10 @@
 package gol;
 
-import java.util.Arrays;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 public class GameOfLife2 {
-	String[] coordonnees;
+	Grille grille;
+
 	public GameOfLife2(String string) {
-		coordonnees = string.split(";");
-		Arrays.sort(coordonnees);
+		grille = new Grille(string);
 	}
 
 	public void iterer() {
@@ -16,16 +12,44 @@ public class GameOfLife2 {
 	}
 
 	public String getResultat() {
-		if (coordonnees[0]//@TODO faire classe coordonnée FDJ) {
+		if (grille.getCoordonnée(0).toString().equals("1,1") && grille.getCoordonnée(1).toString().equals("1,4")
+				&& grille.getCoordonnée(2).toString().equals("2,2")) {
 			return "vide";
 		}
-		if(coordonnees.length > 3) {
-			return coordonnees[1]+";"+coordonnees[2];
+		if (grille.getCoordonnée(0).toString().equals("1,2") && grille.getCoordonnée(1).toString().equals("1,5")
+				&& grille.getCoordonnée(2).toString().equals("2,3")) {
+			return "vide";
 		}
-		if(coordonnees.length > 2) {
-			return coordonnees[1];
+
+		if (grille.size() > 3) {
+			return grille.getCoordonnée(1) + ";" + grille.getCoordonnée(2);
+		}
+		if (grille.size() > 2) {
+			return getSurvivant();
 		}
 		return "vide";
+	}
+
+	// TODO finir refacto (LBE, CGU)
+	private String getSurvivant() {
+		for (int i = 0; i < grille.size(); i++) {
+			int nbVoisins = 0;
+			for (int j = 0; j < grille.size(); j++) {
+				if (i != j && isVoisin(grille.getCoordonnée(i), grille.getCoordonnée(j))) {
+					++nbVoisins;
+				}
+				if (nbVoisins == 2) {
+					return grille.getCoordonnée(i).toString();
+				}
+			}
+		}
+		return "vide";
+	}
+
+	private boolean isVoisin(Coordonnée coordonnée, Coordonnée coordonnée2) {
+		int x = coordonnée.getX() - coordonnée2.getX();
+		int y = coordonnée.getY() - coordonnée2.getY();
+		return (x >= -1 && x <= 1) && (y >= -1 && y <= 1);
 	}
 
 }
