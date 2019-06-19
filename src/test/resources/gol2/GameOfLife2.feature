@@ -19,63 +19,73 @@ Feature: Game of Life
     When Itération
     Then Le résultat est 2,3
 
-  Scenario: Trois cellules vivantes en entrée et une survit
-    Given Coordonnée cellule vivante 1,3;2,3;3,3
-    When Itération
-    Then Le résultat est 2,3
-
-  Scenario: Trois cellules vivantes en entrée et une survit
-    Given Coordonnée cellule vivante 1,2;1,3;1,4
-    When Itération
-    Then Le résultat est 1,3
-
-  Scenario: Trois cellules vivantes en entrée et une survit
-    Given Coordonnée cellule vivante 1,1;1,2;1,3
-    When Itération
-    Then Le résultat est 1,2
-
-  Scenario: Quatre cellules vivantes en entrée et deux survivent
-    Given Coordonnée cellule vivante 1,1;1,2;1,3;1,4
-    When Itération
-    Then Le résultat est 1,2;1,3
-
-  Scenario: Trois cellules vivantes en entrée et une survit
-    Given Coordonnée cellule vivante 1,3;1,2;1,4
-    When Itération
-    Then Le résultat est 1,3
-    
-    Scenario: Trois cellules vivantes en entrée et aucune survit
+  Scenario: Trois cellules vivantes en entrée et aucune survit
     Given Coordonnée cellule vivante 1,1;2,2;1,4
     When Itération
     Then Le résultat est vide
-    
-    Scenario: Trois cellules vivantes en entrée et aucune survit
+
+  Scenario: Trois cellules vivantes en entrée et aucune survit
     Given Coordonnée cellule vivante 2,2;1,1;1,4
     When Itération
     Then Le résultat est vide
-    
-    Scenario: Trois cellules vivantes en entrée et aucune survit
+
+  Scenario: Trois cellules vivantes en entrée et aucune survit
     Given Coordonnée cellule vivante 2,3;1,2;1,5
     When Itération
     Then Le résultat est vide
-    
-    Scenario: Trois cellules vivantes en entrée et un survit
-    Given Coordonnée cellule vivante 2,3;1,2;1,1
+
+  Scenario Template: Trois cellules vivantes en entrée et un survit
+    Given Coordonnée cellule vivante <entrée>
     When Itération
-    Then Le résultat est 1,2
-    
-    Scenario: Trois cellules vivantes en entrée et un survit
-    Given Coordonnée cellule vivante 3,3;2,2;2,1
+    Then Le résultat est <sortie>
+
+    Examples: 
+      | entrée      | sortie |
+      | 1,3;2,3;3,3 | 2,3    |
+      | 1,2;1,3;1,4 | 1,3    |
+      | 1,1;1,2;1,3 | 1,2    |
+      | 1,3;1,2;1,4 | 1,3    |
+
+  Scenario Template: Quatre cellules vivantes en entrée et deux survivent
+    Given Coordonnée cellule vivante <entrée>
     When Itération
-    Then Le résultat est 2,2
-    
-    Scenario: Trois cellules vivantes en entrée et un survit
-    Given Coordonnée cellule vivante 1,3;1,5;2,4
+    Then Le résultat est <sortie>
+
+    Examples: 
+      | entrée          | sortie  |
+      | 1,1;1,2;1,3;1,4 | 1,2;1,3 |
+
+  Scenario Template: Trois cellules vivantes en entrée et quatre survivent
+    Given Coordonnée cellule vivante <entrée>
     When Itération
-    Then Le résultat est 2,4
-    
+    Then Le résultat est <sortie>
+
+    Examples: 
+      | entrée      | sortie          |
+      | 1,1;1,2;2,2 | 1,1;1,2;2,1;2,2 |
+
+  Scenario Template: Trois cellules vivantes en entrée et une survit et une nait
+    Given Coordonnée cellule vivante <entrée>
+    When Itération
+    Then Le résultat est <sortie>
+
+    Examples: 
+      | entrée      | sortie  |
+      | 1,3;1,5;2,4 | 2,4;3,3 |
+      | 3,3;2,2;2,1 | 2,2;3,2 |
+      | 2,3;1,2;1,1 | 1,2;2,2 |
+
+ Scenario Template: Quatre cellules vivantes en entrée et deux survivent et deux naissent
+    Given Coordonnée cellule vivante <entrée>
+    When Itération
+    Then Le résultat est <sortie>
+
+    Examples: 
+      | entrée          | sortie          |
+      | 1,1;2,2;2,3;1,4 | 1,2;1,3;2,2;2,3 |
+
 #  Scenario Template: Une colonne
-#   Given Grille <entrée>
+#   Given Coordonnée <entrée>
 #   When Itération
 #   Then Le résultat est <sortie>
 #
