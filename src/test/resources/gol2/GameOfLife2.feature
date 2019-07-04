@@ -14,11 +14,6 @@ Feature: Game of Life
     When Itération
     Then Le résultat est vide
 
-  Scenario: Deux cellules vivantes
-    Given Coordonnée cellule vivante 2,4;2,3;2,2
-    When Itération
-    Then Le résultat est 2,3
-
   Scenario: Trois cellules vivantes en entrée et aucune survit
     Given Coordonnée cellule vivante 1,1;2,2;1,4
     When Itération
@@ -34,28 +29,28 @@ Feature: Game of Life
     When Itération
     Then Le résultat est vide
 
-  Scenario Template: Trois cellules vivantes en entrée et un survit
+  Scenario Template: Trois cellules vivantes en entrée, une survit et 2 naissent
     Given Coordonnée cellule vivante <entrée>
     When Itération
     Then Le résultat est <sortie>
 
     Examples: 
-      | entrée      | sortie |
-      | 1,3;2,3;3,3 | 2,3    |
-      | 1,2;1,3;1,4 | 1,3    |
-      | 1,1;1,2;1,3 | 1,2    |
-      | 1,3;1,2;1,4 | 1,3    |
+      | entrée      | sortie      |
+      | 1,3;2,3;3,3 | 2,2;2,3;2,4 |
+      | 1,2;1,3;1,4 | 0,3;1,3;2,3 |
+      | 1,1;1,2;1,3 | 0,2;1,2;2,2 |
+      | 1,3;1,2;1,4 | 0,3;1,3;2,3 |
 
-  Scenario Template: Quatre cellules vivantes en entrée et deux survivent
+  Scenario Template: Quatre cellules vivantes en entrée, deux survivent et quatre naissent
     Given Coordonnée cellule vivante <entrée>
     When Itération
     Then Le résultat est <sortie>
 
     Examples: 
-      | entrée          | sortie  |
-      | 1,1;1,2;1,3;1,4 | 1,2;1,3 |
+      | entrée          | sortie                  |
+      | 1,1;1,2;1,3;1,4 | 0,2;0,3;1,2;1,3;2,2;2,3 |
 
-  Scenario Template: Trois cellules vivantes en entrée et quatre survivent
+  Scenario Template: Trois cellules vivantes en entrée et trois survivent et une naît
     Given Coordonnée cellule vivante <entrée>
     When Itération
     Then Le résultat est <sortie>
@@ -63,6 +58,13 @@ Feature: Game of Life
     Examples: 
       | entrée      | sortie          |
       | 1,1;1,2;2,2 | 1,1;1,2;2,1;2,2 |
+      | 2,2;1,2;1,1 | 1,1;1,2;2,1;2,2 |
+      | 1,2;2,2;1,1 | 1,1;1,2;2,1;2,2 |
+      | 2,2;1,1;1,2 | 1,1;1,2;2,1;2,2 |
+      | 2,1;2,2;3,2 | 2,1;2,2;3,1;3,2 |
+      | 3,2;2,2;2,1 | 2,1;2,2;3,1;3,2 |
+      | 1,3;2,3;1,2 | 1,2;1,3;2,2;2,3 |
+      | 2,3;1,2;1,3 | 1,2;1,3;2,2;2,3 |
 
   Scenario Template: Trois cellules vivantes en entrée et une survit et une nait
     Given Coordonnée cellule vivante <entrée>
@@ -71,11 +73,11 @@ Feature: Game of Life
 
     Examples: 
       | entrée      | sortie  |
-      | 1,3;1,5;2,4 | 2,4;3,3 |
+      | 1,3;1,5;2,4 | 1,4;2,4 |
       | 3,3;2,2;2,1 | 2,2;3,2 |
       | 2,3;1,2;1,1 | 1,2;2,2 |
 
- Scenario Template: Quatre cellules vivantes en entrée et deux survivent et deux naissent
+  Scenario Template: Quatre cellules vivantes en entrée et deux survivent et deux naissent
     Given Coordonnée cellule vivante <entrée>
     When Itération
     Then Le résultat est <sortie>
@@ -83,6 +85,15 @@ Feature: Game of Life
     Examples: 
       | entrée          | sortie          |
       | 1,1;2,2;2,3;1,4 | 1,2;1,3;2,2;2,3 |
+
+  Scenario Template: PAF les chocapics
+    Given Coordonnée cellule vivante <entrée>
+    When Itération
+    Then Le résultat est <sortie>
+
+    Examples: 
+      | entrée          | sortie      |
+      | 0,0;0,1;0,2;1,2 | 0,1;0,2;1,2 |
 
 #  Scenario Template: Une colonne
 #   Given Coordonnée <entrée>

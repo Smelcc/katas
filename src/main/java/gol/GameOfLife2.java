@@ -1,6 +1,7 @@
 package gol;
 
-import java.util.StringJoiner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameOfLife2 {
 	Grille grille;
@@ -14,31 +15,67 @@ public class GameOfLife2 {
 	}
 
 	public String getResultat() {
-		return getSurvivants();
+		Grille grilleResultat = new Grille();
+		ajouterCellulesQuiNaissentAuResultat(grilleResultat);
+		ajouterCellulesQuiSurviventAuResultat(grilleResultat);
+		return grilleResultat.toString();
 	}
 
-	private String getSurvivants() {
-		StringJoiner survivants = new StringJoiner(";");
-		for (Coordonnée coordonnée : grille.getCoordonnées()) {
+	private void ajouterCellulesQuiSurviventAuResultat(Grille grilleResultat) {
+		calculerGrilleSurvivants().forEach(coordonnee -> grilleResultat.ajouterCellule(coordonnee));
+	}
+
+	private void ajouterCellulesQuiNaissentAuResultat(Grille grilleResultat) {
+		for (int abscisse = 0; abscisse < grille.getTailleGrille(); abscisse++) {
+			for (int ordonnee = 0; ordonnee < grille.getTailleGrille(); ordonnee++) {
+				ajouterAuResultatSiLaCelluleNait(grilleResultat, abscisse, ordonnee);
+			}
+		}
+	}
+
+	private boolean isCoordonneeVide(Cellule coordonnée) {
+		return grille.getCellule(coordonnée) == null;
+	}
+
+	private void ajouterAuResultatSiLaCelluleNait(Grille grilleResultat, int abscisse, int ordonnee) {
+		Cellule coordonnée = new Cellule(abscisse, ordonnee);
+		if (isCoordonneeVide(coordonnée)) {
+			if (déterminerSiCelluleNait(coordonnée)) {
+				grilleResultat.ajouterCellule(coordonnée);
+			}
+		}
+	}
+
+	private boolean déterminerSiCelluleNait(Cellule coordonnée) {
+		return getNombreDeVoisin(coordonnée) == 3;
+	}
+
+	private List<Cellule> calculerGrilleSurvivants() {
+		List<Cellule> survivants = new ArrayList<Cellule>();
+		for (Cellule coordonnée : grille.getCellules()) {
 			boolean celluleSurvit = déterminerSiCelluleSurvit(coordonnée);
 			if (celluleSurvit) {
-				survivants.add(coordonnée.toString());
+				survivants.add(coordonnée);
 			}
 		}
-		return survivants.length() == 0 ? "vide" : survivants.toString();
+		return survivants;
 	}
 
-	private boolean déterminerSiCelluleSurvit(Coordonnée coordonnée) {
+	private boolean déterminerSiCelluleSurvit(Cellule coordonnée) {
+		int nbVoisins = getNombreDeVoisin(coordonnée);
+		return nbVoisins == 2 || nbVoisins == 3;
+	}
+
+	private int getNombreDeVoisin(Cellule coordonnée) {
 		int nbVoisins = 0;
-		for (Coordonnée voisinPotentiel : grille.getCoordonnées()) {
-			if (isVoisin(coordonnée, voisinPotentiel)) {
+		for (Cellule voisinPotentiel : grille.getCellules()) {
+			if (isVoisin(coordonnée, voisinPotentiel))
 				++nbVoisins;
-			}
 		}
-		return nbVoisins == 2;
+		return nbVoisins;
 	}
 
-	private boolean isVoisin(Coordonnée coordonnée, Coordonnée coordonnée2) {
+	private boolean isVoisin(Cellule coordonnée, Cellule coordonnée2) {
 		if (coordonnée == coordonnée2) {
 			return false;
 		}

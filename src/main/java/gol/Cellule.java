@@ -1,12 +1,17 @@
 package gol;
 
-public class Coordonnée implements Comparable<Coordonnée> {
+public class Cellule implements Comparable<Cellule> {
 	private int x;
 	private int y;
 
-	public Coordonnée(String coor) {
+	public Cellule(String coor) {
 		x = Integer.valueOf(coor.split(",")[0]);
 		y = Integer.valueOf(coor.split(",")[1]);
+	}
+	
+	public Cellule(int abscisse, int ordonnee) {
+		x = abscisse;
+		y = ordonnee;
 	}
 
 	public int getX() {
@@ -23,7 +28,7 @@ public class Coordonnée implements Comparable<Coordonnée> {
 	}
 
 	@Override
-	public int compareTo(Coordonnée o) {
+	public int compareTo(Cellule o) {
 		return this.toString().compareTo(o.toString());
 	}
 }
