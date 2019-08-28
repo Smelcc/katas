@@ -1,81 +1,68 @@
 package bowling;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class PartieBowling {
-//TODO : VGU recoder avec une pile ou une batterie
+
 	public int calculerScore(String lesCoups) {
-		int scoreADoubler = 0;
-		if ("--,X,1/,4-,--,--,--,--,--,--".equals(lesCoups)) {
-			return 38;
-		}
-		if (lesCoups.contains("X")) {
-			Matcher matcher = matcherDeStrike(lesCoups);
-			while (matcher.find()) {
-				scoreADoubler += recupererValeurADoublerPourStrike(matcher);
+		String[] tours = lesCoups.split(",");
+		boolean cestUnStrikeTourCourant = false;
+		boolean cestUnSpareTourCourant = false;
+		boolean cestUnStrikeTourPrecedent = false;
+		boolean cestUnSparePrecedent = false;
+		int resultat = 0;
+		int pointsCoup1 = 0;
+		int pointsCoup2 = 0;
+		String tour = "";
+		for (int i = 0; i < tours.length; i++) {
+			tour = tours[i].replace('-', '0');
+			cestUnStrikeTourCourant = tourEstStrike(tour);
+			cestUnSpareTourCourant = ! cestUnStrikeTourCourant && tourEstSpare(tour);
+			pointsCoup1 = cestUnStrikeTourCourant ? 10 : getValeurDuCoup(tour.charAt(0));
+			pointsCoup2 = cestUnStrikeTourCourant ? 0
+					: cestUnSpareTourCourant ? 10 : getValeurDuCoup(tour.charAt(1));
+			int pointsCoups = pointsCoup1 + pointsCoup2;
+			resultat += pointsCoups > 10 ? 10 : pointsCoups;
+			if (cestUnStrikeTourPrecedent) {
+				resultat += pointsCoups > 10 ? 10 : pointsCoups;
 			}
-			return 10 + scoreADoubler * 2;
+			if (cestUnSparePrecedent) {
+				resultat += pointsCoup1;
+			}
+			cestUnStrikeTourPrecedent = cestUnStrikeTourCourant;
+			cestUnSparePrecedent = cestUnSpareTourCourant;
+
 		}
-		scoreADoubler = calculerScoreADoubler(lesCoups);
-		int nbSpares = (int) lesCoups.chars().filter(coup -> coup == '/').count();
-		String coupsSansSpare = recupererLesCoupsSansLesSpares(lesCoups);
-		int scoreCoupsRéussis = convertirLesCoupsEnScore(coupsSansSpare);
-		return calculerScoreFinal(scoreADoubler, nbSpares, scoreCoupsRéussis);
+		return resultat;
 	}
 
-	private int calculerScoreADoubler(String lesCoups) {
-		Matcher matcher = matcherDeSpare(lesCoups);
-		int scoreADoubler = 0;
-		while (matcher.find()) {
-			scoreADoubler += recupererValeurADoubler(matcher);
-		}
-		return scoreADoubler;
+	private boolean tourEstStrike(String tour) {
+		return tour.charAt(0) == 'X';
 	}
 
-	private int calculerScoreFinal(int resultatADoubler, int nbSpares, int scoreCoupsRéussis) {
-		return (nbSpares * 10 + scoreCoupsRéussis + resultatADoubler);
+	private boolean tourEstSpare(String tour) {
+		return tour.charAt(1) == '/';
 	}
 
-	private int convertirLesCoupsEnScore(String coupsSansSpare) {
-		return coupsSansSpare.chars().filter(coup -> coup != ',').filter(coup -> coup != '-')
-				.map(Character::getNumericValue).sum();
-	}
-
-	private String recupererLesCoupsSansLesSpares(String lesCoups) {
-		return Stream.of(lesCoups.split(",")).filter(coup -> !coup.contains("/")).collect(Collectors.joining());
-	}
-
-	private int recupererValeurADoubler(Matcher matcher) {
-		int resultatADoubler;
-		resultatADoubler = Character.getNumericValue(matcher.group(1).charAt(0));
-		return resultatADoubler;
-	}
-
-	private int recupererValeurADoublerPourStrike(Matcher matcher) {
-		String chiffresAsString = matcher.group(1);
-		if (chiffresAsString.contains("/")) {
+	private int valeurDuTour(String tour, boolean cestUnStrike, boolean cestUnSpare) {
+		tour = tour.replace('-', '0');
+		if (tour.charAt(0) == 'X') {
 			return 10;
 		}
-		int resultatADoubler = Character.getNumericValue(chiffresAsString.charAt(0));
-		if (chiffresAsString.length() > 1) {
-			resultatADoubler += Character.getNumericValue(chiffresAsString.charAt(1));
+		if (tour.charAt(1) == '/') {
+			return 10;
 		}
-		return resultatADoubler;
+		int pointsCoup1 = getValeurDuCoup(tour.charAt(0));
+		int pointsCoup2 = getValeurDuCoup(tour.charAt(1));
+		if (cestUnStrike) {
+			return 2 * (pointsCoup1 + pointsCoup2);
+		}
+		if (cestUnSpare) {
+			return 2 * pointsCoup1 + pointsCoup2;
+		}
+		return pointsCoup1 + pointsCoup2;
 	}
 
-	private Matcher matcherDeSpare(String lesCoups) {
-		Pattern pattern = Pattern.compile("/,(\\d)");
-		Matcher matcher = pattern.matcher(lesCoups);
-		return matcher;
-	}
-
-	private Matcher matcherDeStrike(String lesCoups) {
-		Pattern pattern = Pattern.compile("X,-?([\\d\\/]+)+");
-		Matcher matcher = pattern.matcher(lesCoups);
-		return matcher;
+	private int getValeurDuCoup(char coup) {
+		return Character.getNumericValue(coup);
 	}
 
 }
