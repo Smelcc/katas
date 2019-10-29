@@ -132,4 +132,316 @@ public class TestNumberToLCD {
 						"  |  |  |", 
 						"  |  |  |"));
 	}
+	
+	@Test
+	public void valeur11111() {
+		List<String> resultat = NumberToLCD.convertirEnLCD(11111);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("               ",
+						"  |  |  |  |  |", 
+						"  |  |  |  |  |"));
+	}
+	
+	/*@Test
+	public void valeur2_avec_3largeur_2hauteur() {
+		int largeur = 3;
+		int hauteur = 2;
+		int entrée = 2;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" ___ ", 
+						"    |", 
+						"    |", 
+						" ___ ", 
+						"|    ", 
+						"|    ", 
+						" ___ "));
+	}
+	
+	@Test
+	public void valeur1_avec_3largeur_2hauteur() {
+		int largeur = 3;
+		int hauteur = 2;
+		int entrée = 1;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("     ", 
+						"    |", 
+						"    |", 
+						"     ", 
+						"    |", 
+						"    |", 
+						"     "));
+	}*/
+	
+	@Test
+	public void valeur1_avec_1largeur_1hauteur() {
+		int largeur = 1;
+		int hauteur = 1;
+		int entrée = 1;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("   ", 
+						"  |",  
+						"  |"));
+	}
+
+	@Test
+	public void valeur1_avec_1largeur_2hauteur() {
+		int largeur = 1;
+		int hauteur = 2;
+		int entrée = 1;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("   ", 
+						"  |",  
+						"  |",
+						"   ", 
+						"  |",  
+						"  |",
+						"   "));
+	}
+
+	@Test
+	public void valeur1_avec_1largeur_3hauteur() {
+		int largeur = 1;
+		int hauteur = 3;
+		int entrée = 1;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("   ", 
+						"  |",  
+						"  |",  
+						"  |",
+						"   ", 
+						"  |",  
+						"  |",  
+						"  |",
+						"   "));
+	}
+	
+	@Test
+	public void valeur1_avec_1largeur_5hauteur() {
+		int largeur = 1;
+		int hauteur = 5;
+		int entrée = 1;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("   ", 
+						"  |",  
+						"  |",  
+						"  |",
+						"  |",
+						"  |",
+						"   ", 
+						"  |",
+						"  |",
+						"  |",  
+						"  |",  
+						"  |",
+						"   "));
+	}
+	
+	@Test
+	public void valeur1_avec_1largeur_4hauteur() {
+		int largeur = 1;
+		int hauteur = 4;
+		int entrée = 1;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("   ", 
+						"  |",  
+						"  |",  
+						"  |",
+						"  |",
+						"   ", 
+						"  |",  
+						"  |",  
+						"  |",  
+						"  |",
+						"   "));
+	}
+	@Test
+	public void valeur2_avec_1largeur_2hauteur() {
+		int largeur = 1;
+		int hauteur = 2;
+		int entrée = 2;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" _ ", 
+						"  |",  
+						"  |",
+						" _ ", 
+						"|  ",  
+						"|  ",
+						" _ "));
+	}
+	@Test
+	public void valeur2_avec_1largeur_3hauteur() {
+		int largeur = 1;
+		int hauteur = 3;
+		int entrée = 2;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" _ ", 
+						"  |",  
+						"  |",
+						"  |",
+						" _ ", 
+						"|  ",  
+						"|  ",
+						"|  ",
+						" _ "));
+	}
+	
+	@Test
+	public void valeur2_avec_1largeur_4hauteur() {
+		int largeur = 1;
+		int hauteur = 4;
+		int entrée = 2;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" _ ", 
+						"  |",  
+						"  |",
+						"  |",
+						"  |",
+						" _ ", 
+						"|  ",  
+						"|  ",
+						"|  ",
+						"|  ",
+						" _ "));
+	}
+
+	@Test
+	public void valeur3_avec_1largeur_4hauteur() {
+		int largeur = 1;
+		int hauteur = 4;
+		int entrée = 3;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" _ ", 
+						"  |",  
+						"  |",
+						"  |",
+						"  |",
+						" _ ", 
+						"  |",  
+						"  |",
+						"  |",
+						"  |",
+						" _ "));
+	}
+	
+	@Test
+	public void valeur4_avec_1largeur_2hauteur() {
+		int largeur = 1;
+		int hauteur = 2;
+		int entrée = 4;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of("   ", 
+						"| |",  
+						"| |",  
+						" _ ", 
+						"  |",
+						"  |",
+						"   "));
+	}
+	
+	@Test
+	public void valeur9_avec_1largeur_3hauteur() {
+		int largeur = 1;
+		int hauteur = 3;
+		int entrée = 9;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" _ ", 
+						"| |",  
+						"| |",  
+						"| |",  
+						" _ ", 
+						"  |",
+						"  |",
+						"  |",
+						" _ "));
+	}
+	
+	@Test
+	public void valeur9_avec_2largeur_1hauteur() {
+		int largeur = 2;
+		int hauteur = 1;
+		int entrée = 9;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" __ ", 
+						"|__|",    
+						" __|"));
+	}
+	
+	@Test
+	public void valeur8_avec_3largeur_1hauteur() {
+		int largeur = 3;
+		int hauteur = 1;
+		int entrée = 8;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" ___ ", 
+						"|___|",    
+						"|___|"));
+	}
+	
+	@Test
+	public void valeur8_avec_5largeur_1hauteur() {
+		int largeur = 5;
+		int hauteur = 1;
+		int entrée = 8;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" _____ ", 
+						"|_____|",    
+						"|_____|"));
+	}
+	
+	@Test
+	public void valeur8_avec_10largeur_1hauteur() {
+		int largeur = 10;
+		int hauteur = 1;
+		int entrée = 8;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" __________ ", 
+						"|__________|",    
+						"|__________|"));
+	}
+	
+	@Test
+	public void valeur5_avec_6largeur_1hauteur() {
+		int largeur = 6;
+		int hauteur = 1;
+		int entrée = 5;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" ______ ", 
+						"|______ ",    
+						" ______|"));
+	}
+	
+	@Test
+	public void valeur2_avec_2largeur_2hauteur() {
+		int largeur = 2;
+		int hauteur = 2;
+		int entrée = 2;
+		List<String> resultat = NumberToLCD.convertirEnLCD(entrée, hauteur, largeur);
+		Assertions.assertThat(resultat).isEqualTo(
+				List.of(" __ ", 
+						"   |", 
+						"   |", 
+						" __ ",    
+						"|   ",    
+						"|   ",    
+						" __ "));
+	}
+	
 }
