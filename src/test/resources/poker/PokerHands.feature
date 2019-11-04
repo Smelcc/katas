@@ -37,11 +37,30 @@ Feature: Poker Hands
       | entree                             | resultatAttendu      |
       | [2K,3C,4P,6T,8T], [2C,3K,4T,7C,8C] | Joueur2 gagne avec 7 |
       | [2K,3C,5P,7T,8T], [2C,3K,4T,7C,8C] | Joueur1 gagne avec 5 |
-      
+
   Scenario Template: la paire gagne
     Given entrée <entree>
     Then le résultat est <resultatAttendu>
 
     Examples: 
-      | entree                             | resultatAttendu              |
-      | [2K,2C,4P,6T,8T], [2P,3K,4T,6C,8C] | Joueur1 gagne avec une paire |
+      | entree                             | resultatAttendu                   |
+      | [2K,2C,4P,6T,8T], [2P,3K,4T,6C,8C] | Joueur1 gagne avec une paire de 2 |
+      | [2K,2C,4P,6T,8T], [3P,3K,4T,6C,8C] | Joueur2 gagne avec une paire de 3 |
+      | [4K,4C,4P,6T,8T], [3P,3K,4T,6C,8C] | Joueur1 gagne avec une paire de 4 |
+
+  Scenario Template: la double paire gagne
+    Given entrée <entree>
+    Then le résultat est <resultatAttendu>
+
+    Examples: 
+      | entree                             | resultatAttendu                          |
+      | [2K,2C,5P,5T,8T], [2P,3K,4T,6C,8C] | Joueur1 gagne avec une double paire de 5 |
+
+  Scenario Template: la valeur gagne avec paires égales
+    Given entrée <entree>
+    Then le résultat est <resultatAttendu>
+
+    Examples: 
+      | entree                             | resultatAttendu      |
+      | [2K,2C,4P,6T,9T], [2P,2T,4T,6C,8C] | Joueur1 gagne avec 9 |
+      | [3K,3C,4P,6T,8T], [3P,3T,4T,6C,DC] | Joueur2 gagne avec D |
