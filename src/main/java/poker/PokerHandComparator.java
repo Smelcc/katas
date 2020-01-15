@@ -18,7 +18,11 @@ public class PokerHandComparator {
 	public String compare() {
 		 Joueur vainqueur = joueur1.compareTo(joueur2);
 		 return vainqueur == null ? EGALITE 
-				 : vainqueur.getNom() + " gagne avec " + vainqueur.getConditionVictoire();
+				 : vainqueur.getNom() + " gagne avec " + déterminerConditionVictoire(vainqueur);
+	}
+
+	private String déterminerConditionVictoire(Joueur vainqueur) {
+		return vainqueur.récupérerCombinaisonLaPlusForte();
 	}
 
 	private List<Carte> récupérerMainDepuisChaineDeCaractères(String mainJoueurUn) {
