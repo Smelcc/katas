@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO refacto Stream CGU a envie de le faire, ça va nous prendre 3/4 d'heures
-public class OnSenFout {
+public class CaNousInteresseGrave {
 
 	private static final int NOMBRE_ARRET_MAXIMUMMMMMMMMMMMM = 480;
 	private static final int CHAUFFEUR_UN = 0;

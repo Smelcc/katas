@@ -8,7 +8,7 @@ import cucumber.api.java.en.Then;
 
 public class BusDriverStepDefs {
 
-	private OnSenFout busDriver = new OnSenFout();
+	private CaNousInteresseGrave busDriver = new CaNousInteresseGrave();
 
 	@Given("^Un chauffeur avec pour route (\\d+)$")
 	public void ajouterChauffeur(String route) {
